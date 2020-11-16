@@ -1,0 +1,234 @@
+<html>
+    <head>
+
+        <title><%=title%></title>
+        <!-- above is the dynamic title of the page -->        
+
+        <link rel="stylesheet" type="text/css" href="./css/style.css">      
+        <!-- above is the link to the external stylesheet -->
+
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+        <!-- meta tag for adjusting the content according to the device width -->
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <!-- above is the link to use font-awesome CDN -->
+
+    </head>
+
+    <body>
+
+        <!-- main -->
+
+        <div id="main">
+
+            <!-- main heading -->
+
+            <div id="main-heading">
+                <i class="fas fa-clipboard-list"></i><span>todo list</span>
+            </div>
+
+            <!-- add task form which sends the request through post method the to "/add-task" route -->
+            
+            <form action="/add-task" method="post" id="add-task">
+
+                <!-- description container -->
+
+                <div id="describe">
+                    <label for="description" id="description-label" class="label">Description</label>
+
+                        <!-- description input -->
+
+                    <input type="text" id="description" name="description" placeholder="Enter a task" required class="input"> 
+                </div>
+
+                <!-- category dueDate container-->
+
+                <div id="category-due-date">
+                    <div id="cat">
+                        <div id="select-div">
+                            <label for="category" id="category-label" class="label">Category</label>
+
+                            <!-- category input -->
+
+                            <select id="category" name="category" required class="input">
+                                <option value="personal">Personal</option>
+                                <option value="office">Office</option>
+                                <option value="bank">Bank</option>  
+                                <option value="maintaince">Maintaince</option>                                        
+                                <option value="grocery">Grocery</option>  
+                                <option value="confectionary">Confectionary</option>     
+                                <option value="other">Other</option>                                                                           
+                            </select>                           
+                        </div>
+                    </div>
+
+                    <div id="due-date">
+                        <label for="dueDate" id="dueDate-label" class="label">Due Date</label>
+
+                        <!-- dueDate input -->
+
+                        <input type="date" id="dueDate" name="dueDate" placeholder="dd/mm/yy" class="input">                   
+                    </div>
+                </div>                     
+            </form>    
+
+            <!-- buttons -->
+                
+            <div id="buttons">
+
+                <!-- add button -->
+
+                <button type="submit" form="add-task" id="add" class="button"><i class="fas fa-plus"></i><span>add task</span>          
+                    
+                <!-- delete button -->
+
+                <button type="submit" form="delete-task" id="delete" class="button"><i class="fas fa-trash-alt"></i><span>delete task(s)</span></button>
+            </div>                    
+        </div>
+
+        <!-- tasks to do today -->
+
+        <div id="tasks-to-do-today">            
+
+            <!-- tasks to do today list -->
+
+            <div id="tasks-to-do-today-list">
+
+                <!-- close button, to close the list -->
+
+                <button id="close">
+                    X
+                </button>
+
+                <!-- this count is maintained to see the number of tasks which are due today -->
+
+                <%let count=0;%>
+
+                <!-- tasks to do today content container -->
+
+                <div id="tasks-to-do-today-content">
+
+                    <%for(let i of task_list){%>                    
+
+                        <!-- we are iterating on all the tasks to see which of them are due today -->
+
+                        <%let taskDate=i.dueDate;%>
+
+                        <%let dateTime=new Date();%>
+                        <%let currDate=dateTime.toISOString().slice(0, 10);%>
+
+                        <!-- above we are obtaining the task due date and the current date in task due date's format and are matching them to see if the task is due today -->                        
+
+                        <%let equal=true;%>
+
+                        <%for(let i=0;i<currDate.length;i++){%>
+
+                            <!-- comparing the task due date and the current date -->
+
+                            <%if(currDate[i]!=taskDate[i]){%>
+                                <%equal=false;%>
+                                <%break;%>
+                            <%}%>                
+
+                        <%}%>
+
+                        <%if(equal){%>
+
+                            <!-- adding the task's description to the list of tasks due today if it is due today -->
+
+                            <div class="tasks-to-do-today-description">
+                                <%=i.description%>
+                            </div>
+                            
+                            <%count++;%>
+
+                        <%}%>                            
+
+                    <%}%>
+
+                </div>
+
+            </div>            
+
+            <%if(count!=0){%>                
+
+                <!-- we display the tasks to do today button if there are any tasks which are due today -->
+
+                <button id=tasks-to-do-today-button class="button-styling">
+                    <i class="fas fa-bell"></i>
+                    <span>Click to see task(s) due TODAY</span>
+                </button>
+            
+            <%}else{%>
+
+                <!-- we display this message if there are no tasks which are due today -->
+
+                <div class="button-styling">
+                    No tasks due today
+                </div>
+
+            <%}%>
+        </div>
+
+        <!-- list -->
+
+        <div id="list">            
+
+            <!-- list heading -->
+
+            <div id="list-heading">
+                <i class="fas fa-pencil-alt"></i>                        
+                Task(s) To Do
+            </div>
+
+            <!-- message to show when we have no tasks -->
+
+            <div id="no-work-to-do">
+                <%if(task_list.length==0){%>
+                    <div>No work to do</div>
+                    <div>Go ahead and add some</div>
+                <%}%>
+            </div>
+
+            <!-- delete task form which sends the request through post method to the "/delete-task" route -->
+            
+            <form action="/delete-task" method="post" id="delete-task">      
+                <%for(let i of task_list){%>
+
+                    <!-- task container -->
+
+                    <div class="task">
+                        <label class="check-container">
+
+                            <!-- tasks to delete input and we are sending the unique object id as the value to be checked while deleting the contact -->
+
+                            <input type="checkbox" class="checkbox" value="<%=i._id%>" name="tasksToDelete">
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <!-- task category container -->
+
+                        <div class="task-category">
+
+                            <!-- task description -->
+
+                            <div class="task-description"><%=i.description%></div>
+
+                            <!-- task category -->
+
+                            <div class="category"><i class="fas fa-calendar-alt"></i><span><%=i.category%></span></div>                
+                        </div>
+
+                        <!-- task date -->
+
+                        <div class="date" data-val="<%=i.dueDate%>"><%=i.dueDate%></div>                    
+                    </div>        
+                <%}%>
+            </form>
+        </div>
+
+        <script type="text/javascript" src="./js/script.js"></script>
+        <!-- above is the link to the external js file -->
+
+    </body>
+</html>

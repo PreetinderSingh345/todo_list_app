@@ -1,0 +1,563 @@
+/* body */
+
+body{
+
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;    
+    height: 100vh;    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: sans-serif;
+    min-width: 300px;
+    min-height: 600px;    
+    background-color: skyblue;
+
+}
+
+/* main */
+
+#main{
+
+    height: 66vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;    
+    background-color: #e6f9ff;
+    border-radius: 5px;
+    min-height: 345px;
+    transition: opacity 0.3s ease-in-out;
+
+}
+
+/* main heading */
+
+#main-heading{
+
+    text-align: center;
+    font-size: 2rem;
+    color: darkslategray;
+    font-weight: bold;    
+    text-transform: uppercase;
+    background-color: gainsboro;      
+    border-radius: 5px;
+
+}
+
+#main-heading i{
+
+    margin-right: 15px;
+
+}
+
+/* add task form*/
+
+#add-task{
+
+    margin: 0;
+        
+}
+
+#describe{
+
+    padding: 10px;
+
+}
+
+/* labels */
+
+.label{
+
+    display: block;    
+    padding: 5px;
+    color: rgb(66, 65, 65);
+    font-weight: bold;
+    background-color: lightblue;
+    border-radius: 5px 5px 0 0;
+
+}
+
+/* inputs */
+
+.input{
+
+    display: block;
+    width: 100%;
+    padding: 5px;
+    color: darkslategray;
+    outline: none;
+    border: none;    
+    background-color: rgb(220, 232, 236);
+    border-radius: 0 0 5px 5px;
+
+}
+
+.input:focus{
+
+    box-shadow: 0 0 2px 2px lightslategray inset;
+
+}
+
+/* describe input field */
+
+#description{
+    
+    height: 50px;   
+    font-size: 0.9rem;     
+
+}
+
+#category-due-date{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
+
+}
+
+#cat{
+
+    width: 45%;   
+    padding: 5px;
+
+}
+
+/* category input field */
+
+#category{
+        
+    height: 30px;
+
+}
+
+#category option{
+
+    background-color: lightblue;     
+
+}
+
+#due-date{
+
+    width: 45%;    
+    padding: 5px;
+
+}
+
+/* adjusting the cat and due-date section */
+
+@media only screen and (max-width: 500px){
+
+    body #cat{
+
+        width: 100%;
+
+    }
+
+    body #due-date{
+
+        width: 100%;
+
+    }
+
+}
+
+/* dueDate input field */
+
+#dueDate{
+
+    height: 30px;
+
+}
+
+#buttons{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+/* buttons */
+
+.button{
+          
+    height: 60px;
+    width: 25%;
+    margin: 0 5px;
+    text-transform: uppercase;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+
+}
+
+.button i{
+
+    margin-right: 10px;
+
+}
+
+/* adjusting the buttons */
+
+@media only screen and (max-width: 500px){
+
+    .button{
+
+        height: 25px;
+        width: 100%;
+        margin: 5px;
+
+    }
+
+}
+
+/* add button */
+
+#add{
+
+    background-color:rgb(185, 238, 185);   
+    color: rgb(5, 189, 5);    
+    outline: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+}
+
+#add:hover{
+
+    color: rgb(185, 238, 185);
+    background-color: rgb(5, 189, 5);
+
+}
+
+/* delete button */
+
+#delete{
+    
+    color: rgb(224, 0, 0);
+    background-color: rgb(235, 176, 176);
+    outline: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+}
+
+#delete:hover{
+
+    color: rgb(235, 176, 176);
+    background-color: rgb(224, 0, 0);
+
+}
+
+/* list */
+
+#list{
+
+    height: 33vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #e6f9ff;    
+    border-radius: 5px;
+    min-height: 153px;
+    transition: opacity 0.3s ease-in-out;
+
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar{
+
+    width: 10px;    
+
+}
+
+::-webkit-scrollbar-track{
+
+    border-radius: 5px;
+    background-color: lightgrey;    
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: rgb(179, 175, 175);
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background-color: grey;
+
+}
+
+/* tasks to do today */
+
+#tasks-to-do-today{
+
+    text-align: center;
+    padding: 10px 0;    
+
+}
+
+/* tasks to do today list */
+
+#tasks-to-do-today-list{
+
+    display: none;
+    position: absolute;     
+    top: 15%;
+    left: 20%;    
+    border-radius: 5px;
+    background-color: goldenrod;
+    width: 60%;    
+    z-index: 1;  
+
+}
+
+/* close button to close the list */
+
+#close{
+
+    margin: 5px;
+    font-weight: bold;        
+    color: white;
+    background-color: darkslategray;
+    border-radius: 2px;    
+    border: none;
+    outline: none;
+
+}
+
+/* tasks to do today content container */
+
+#tasks-to-do-today-content{
+        
+    max-height: 365px;
+    overflow-y: auto;
+
+}
+
+/* description of the tasks to do today */
+
+.tasks-to-do-today-description{
+   
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: papayawhip;       
+    color: darkslategray;
+    word-wrap: break-word; 
+
+}
+
+/* button styling */
+
+.button-styling{
+    
+    font-size: 1.3rem;
+    color: darkslategray;
+    font-weight: bold;
+    background-color: gainsboro; 
+    border-radius: 5px;               
+
+}
+
+/* tasks to do today button */
+
+#tasks-to-do-today-button{
+
+    outline: none;
+    transition: opacity 0.3s ease-in-out;
+
+}
+
+/* list heading */
+
+#list-heading{
+
+    text-align: center;
+    font-size: 1.3rem;
+    color: darkslategray;
+    font-weight: bold;
+    background-color: gainsboro; 
+    border-radius: 5px 5px 0 0;    
+
+}
+
+/* message to show when we have no tasks */
+
+#no-work-to-do{
+
+    font-size: 1.2rem;
+    text-align: center;
+    color: darkslategray;
+    font-weight: bold;
+    background-color: gainsboro; 
+    border-radius: 5px 5px 0 0; 
+
+}
+
+/* delete task form */
+
+#delete-task{
+
+    margin: 0;
+    overflow-y: auto;       
+
+}
+
+/* task */
+
+.task{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;    
+    align-items: center;    
+    margin: 5px;
+    background-color: #e6f9ff;
+
+}
+
+/* checkbox */
+
+.check-container{
+      
+    position: relative;
+    cursor: pointer;    
+    user-select: none;        
+
+}
+
+.checkbox{
+
+    position: absolute;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    opacity: 0;        
+
+}
+
+.checkmark{
+
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    height: 25px;
+    width: 25px;  
+    border-radius: 50%;     
+    background-color: lightgrey;  
+    transition: background-color 0.3s ease-in-out;  
+
+}
+
+.checkmark::after{
+
+    content: "";
+    position: absolute;
+    display: none;       
+    transition: border 0.3s ease-in-out;
+
+}
+
+.checkbox:checked ~ .checkmark::after{
+
+    content: "";
+    display: block;
+    height: 10px;
+    width: 5px;
+    top: 5px;
+    left: 9px;
+    border: solid darkgreen;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);    
+
+}
+
+.checkbox:checked ~ .checkmark{
+
+    box-shadow: 0 0 2px 2px darkgreen;
+    background-color: rgb(174, 252, 58);
+
+}
+
+.checkmark:hover{
+
+    background-color: grey;
+
+}
+
+.task-category{
+
+    width: 70%;
+    color: darkslategray;
+    background-color: rgb(220, 232, 236);
+    border-radius: 5px;
+
+}
+
+/* adjusting the task-category section */
+
+@media only screen and (max-width: 600px){
+
+    body .task-category{
+
+        width: 50%;
+
+    }
+
+}
+
+/* task description */
+
+.task-description{
+
+    text-align: justify;
+    padding: 5px;    
+    word-wrap: break-word;
+
+}
+
+/* category */
+
+.category{
+
+    padding: 5px;
+}
+
+.category i{
+
+    margin-right: 5px;
+
+}
+
+/* date */
+
+.date{
+
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: yellow;
+    background-color: rgb(255, 145, 0);    
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+}
+
+.date:hover{
+        
+    color: rgb(255, 145, 0);
+    background-color: yellow;
+
+}
